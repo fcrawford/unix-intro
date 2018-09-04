@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Unix For Scientists</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+
+name: inverse
+layout: true
+class: center, middle, inverse
+
+---
+
+# Unix for Scientists
+
+### Scientific Research Skills Workshop Series
+
+Forrest W. Crawford
+
+.footnote[[Source](https://github.com/fcrawford/unix-intro)]
+
+---
+
+layout: false
+
+# Getting Started
+
+There are lots of UNIX tutorials on the web. 
+
+This one is not better than any of those, but it is happening right now, so it should be easy to pay attention and learn the basics.
+
+To get started, open a terminal/shell window
+* Terminal on OS X
+* Shell on other unix systems
+* Cygwin (Terminal Emulator on Windows)
+* Or go here: https://www.tutorialspoint.com/unix_terminal_online.php
+
+---
+
+# What is UNIX?
+
+Unix is a kind of computer operating system invented in the 1970s.  You may have heard of many variants of UNIX:
+
+> BSD, OS X, Linux, RHEL, Ubuntu, Debian
+
+UNIX is popular because it is simple, modular, secure, and extremely flexible.  Most UNIX tools are open-source. UNIX is the preferred operating system for basically all difficult or important tasks in scientific computing.
+
+---
+
+# The UNIX terminal
+
+
+
+The usual (and old-fashioned) way to interact with a UNIX computer is via the terminal, which is a text-based interface that allows you to give the computer commands and ask it questions.
+
+
+* Open a program
+* Analyze the data in this file
+* What files do I have in this directory?
+* Go to another directory
+* Rename a file
+* Get a file from somewhere else and bring it here.
+
+The terminal is a text display. When you type commands into it, you are giving instructions to the computer, and it gives you information back.
+Usually, commands have the following form:
+```bash
+command -option argument1 argument2 ...
+```
+
+---
+
+# Manpages
+
+UNIX provides a utility for learning more about commands. Every command that is intrinsic to the UNIX distribution (`cd`, `ls`, `mkdir`, `etc`.) has a manual page. These can be accessed with the `man` command. To see the manual page for the interesting command `grep`, type:
+```bash
+man grep
+```
+You will see a manual page that describes the functionality of the command and its various options. Scroll through the manual (which can be very long) one screenful at a time with the space bar, one line at a time with the Enter key, and quit by typing `q`.
+
+---
+
+# Paths and the directory structure
+
+Using the UNIX terminal, you must frequently tell the computer where in its memory to find a certain file, directory, or program. In UNIX, a folder is called a "directory".  
+
+A directory is a place in the computer's memory where you can store files and other directories. Every directory is contained within another directory except for one, the top-level directory, which is known as the "root" directory. 
+
+This structure is called the file hierarchy. 
+
+The root directory contains many directories, which also contain many directories. Each directory has a name, so you can say which directory you are interested in by putting a `/` (slash) between the names of directories.  
+
+For example, the root directory contains a directory called `home`, which contains a directory whose
+name is your username. 
+
+---
+
+# Home directory
+
+If your username is `forrest`, then the path to your home directory might be
+```bash
+/home/forrest
+```
+or 
+```bash
+/Users/forrest
+```
+on OS X.  The leading `/` means the root directory. Inside the root directory, there is a directory called `home`. Inside
+that directory, there is another named `forrest`. Likewise, if you have a directory inside your home directory
+called `stuff`, then the path to this directory is
+```bash
+/home/forrest/stuff
+```
+
+---
+
+# Case sensitivity
+
+You should also know that UNIX is case-sensitive, which means that it knows the difference between
+lower-case and upper-case letters, and it cares about the difference. The name
+`forrest` is different from all of these:
+```bash
+Forrest FORREST FoRrEsT
+```
+
+---
+
+# Navigation
+
+When you are navigating through the directory structure (finding a file, processing data, etc.), you must know where you are, and you must know where you want to go. To go to a different directory, use the cd command. cd takes one argument, which is a path. cd stands for "change directory". To go to your home directory, type:
+```bash
+cd /home/forrest
+```
+No matter where you were when you typed this, you are now in `/home/forrest`. To see the contents of your current directory, you can list its contents
+```bash
+ls
+```
+When you type the `ls` command without any arguments, it simply lists all the files and directories that are in your _current_ directory. If you use `ls` with a path like `/home/forrest`, you will list the contents of `/home/forrest` without actually going there:
+```bash
+ls /home/forrest
+```
+
+---
+
+Some files are hidden by default by the `ls` command. These are files that you don't want to see every
+day, but are essential configuration files for various programs you use. These files hold information
+about your preferences when using different programs, and the first character is a `.` (dot). They usually
+reside in your home directory. Type
+```bash
+ls -a
+```
+(a stands for "all") to show all files in a directory. This is what it will look like, with the "hidden" files first, then the other files.
+```bash
+.adobe .emacs .gimp .netscape documents src training
+```
+You usually won't need to worry about these files, but it's important to know they are there.
+
+If you are ever unsure of where in the directory tree you are, then you can use the
+```bash
+pwd
+```
+command, which stands for "print working directory".
+
+---
+
+# Relative paths I
+
+Now you can go different places in your computer's memory and see what's there. But you don't have to
+type in a full path all the time. You can use a "relative path", which means that you type the path relative
+to the directory you are in.
+
+When you type
+```bash
+cd /home/forrest/stuff/images
+```
+you are instructing the computer to go to the root directory `/`, then the home directory, then the `forrest` directory, and so on.
+
+
+If you were in `/home/forrest` already, then you could just type
+```bash
+cd stuff/images
+```
+Since `stuff` is a subdirectory of `/home/forrest`, you can just put it in your path directly without referencing
+it through `/home/forrest`. Note that there is no leading `/` in the relative path because `stuff` is
+not a subdirectory of the root directory - it's relative to your current directory. 
+
+---
+
+# Relative paths II
+
+If you were in `/ home/forrest/stuff/images` and you wanted to go to `/home/forrest/stuff/documents`, then
+you could type:
+```bash
+cd /home/forrest/stuff/documents
+```
+but that is long and hard to type. You can use a relative path here too, with the `..` symbol, which stands for the "parent" directory, that is, the directory which contains the current directory. Only the root directory has no parent directory.
+
+To get to `/home/forrest/stuff/documents` from `/home/forrest/stuff/images`, just type:
+```bash
+cd ../documents
+```
+
+### Shortcuts: 
+
+Type `cd ~` to go to your home directory. 
+
+Type `cd -` to go to the previous directory.
+
+
+---
+
+# Where you are
+
+There is one more symbol to know about, which will come in handy later, which allows you to make reference to the current directory. This is the `.` (dot) symbol, which means "the current directory". For example,
+```bash
+cp /home/forrest/stuff/document.txt .
+```
+Which means, in English, "copy `/home/forrest/stuff/document.txt` to my current directory". This is much easier than explicitly stating the full path to wherever you are.
+
+---
+
+# Commands and command path
+
+Now it's time for a digression before we discuss some other commands - it's important to know what a command really is. When you type a command into the terminal and press [Enter], your computer looks around in certain places for a file that has the same name as the command you typed in. A command is just a file with computer instructions in it. When your computer finds the right file, it reads those instructions, and then does whatever the command tells it to do. Commands like cd and ls and pwd are just files that contain computer instructions to do certain things, and to show you certain things on your screen. Since commands are just files with instructions in them, you can make your own commands. This is one of the most powerful features of UNIX - it is very customizable.
+
+[give a quick example of a bash script made executable and placed in the executable path ]
+[show how to run a command not in path using `./foo` ]
+
+---
+# Making files and directories
+
+The `mkdir` command makes a new directory, and you can use it like this:
+```bash
+mkdir name
+```
+where `name` is what you want to name the new directory. If you list several
+names and `mkdir` will create directories with all the names you specify.
+
+The `cp` command copies a file or directory from one place to another:
+```bash
+cp thing somewhere
+```
+where `thing` is the file or directory you want to copy, and `somewhere` is the place where you want to put it. If `thing` is a directory, and you want to copy the directory and all its contents, then you can use the `-r` flag, as in:
+```bash
+cp -r myfiles /home/forrest/private
+```
+
+---
+
+# Moving things
+
+You can also use `cp` to rename a file as you copy it:
+```bash
+cp thing somewhere/newname
+```
+Now `thing` has been copied, and the new copy renamed `newname` and put in `somewhere`.
+
+The `mv` command moves a file or directory from one place to another, or renames files or directories. Its usage is similar to that of cp:
+```bash
+mv thing somewhere
+```
+You can use mv to move files or directories. mv does not need a -r flag to move a directory and all its contents. The mv command can also be used to rename files or directories similarly to cp:
+```bash
+mv thing somewhere/newname
+```
+
+---
+
+# Removing things 
+
+The `rm` command removes (deletes) a file or directory. It is used like this:
+```bash
+rm thing
+```
+where thing is a file. 
+
+Empty directories can be removed with the `rmdir` command.
+
+You can remove a non-empty directory with the `-r` (recursive) flag. 
+
+
+---
+
+# Permissions I
+
+UNIX has a special way of keeping track of who is allowed to do things with different files.  Typing `ls -l` gives
+```bash
+drwxr-xr-x 5 forrest 512 Apr 16 09:49 projects
+drwxr-xr-x 8 forrest 1024 Jul 7 13:41 scratch
+drwxr-xr-x 3 forrest 512 Jun 26 15:13 src
+drwxr-xr-x 2 forrest 512 May 28 14:45 stuff
+drwxr-xr-x 4 forrest 512 Jun 26 15:02 testing
+drwxr-xr-x 2 forrest 512 Jul 8 16:15 training
+drwxr-xr-x 5 forrest 512 May 30 11:49 yale
+-rwx------ 1 forrest 23476 May 11 05:43 zorro.jpg
+```
+The first thing on each line that looks like this:
+```bash
+drwxr-xr-x
+```
+is the permissions field. The `d` at the beginning means that this object is a directory. The following characters are divided into 3 fields of permissions: user, group, and other. The first three characters `rwx` are the user's (owner's) permissions. The second three characters `r-x` are the permissions for other people in the user's group. The third three characters are permissions for anyone else.
+
+---
+
+# Permissions II
+
+Each set of permissions (user, group, and other) has three subfields that indicate the permissions for three different types of actions you can take on a file. The permissions for the user look something like
+this:
+`rwx`
+which means that the user has "read", "write", and "execute" permission for this file.
+
+* "Read" `r` means that you can look at the contents of the file.
+* "Write"  `w` permission means you can modify the contents,
+change the filename, or delete it altogether if you wish.
+* "Execute" permission means you can invoke the file as a program.
+
+There is a special way of telling UNIX how you want the permissions for a
+certain file to be, using the `chmod` command, which stands for "change mode".
+
+---
+
+# Permissions III
+
+You can specify how the permissions should be for each of the three types of users. To change the group permission for a file
+to make it "group writable" with these permissions:
+```bash
+rwxr-x---
+```
+you type:
+```bash
+chmod g+w filename
+```
+where `filename` is the name of the file whose permissions you wish to change. The `g+w` part means "group add write", which means "Make this file writable by users in my group". Similarly, `g+r` and `g+x` mean "make group readable" and "make group executable", respectively. You can do this for any
+of the three types of users too: `u+x` makes a file executable for you, and `o+r` makes a file readable by everyone else. You can specify all types of users with a like this: `a-x`, which makes the file non-executable by all users. There is another way to set several types of users' permissions at once using numeric values for different permissions. You can read more about it in online UNIX tutorials.
+
+---
+
+# looking at files
+
+* `more` shows the contents of a text files, one screenfull at a time. `less` is a slightly better version of `more`.
+* `cat` (concatenate) just dumps the contents of a text file on the screen
+* `head` shows the first few lines of a file.
+* `tail` shows the last few lines of a file
+
+Editing files
+
+* `vi` Never use this unless you know what you are doing
+* `emacs`
+* `pico`
+
+---
+
+# More commands
+
+* `ps` lists the active processes (programs) on your system
+* `grep` searches text files for patterns or words
+
+---
+
+# Creating a new UNIX executable
+
+Create a new text file called `test.py`
+```python
+#!/usr/local/bin/python
+
+print("Hello, World!")
+```
+Make the file executable
+```bash
+chmod +x test.py
+```
+Now run it
+```bash
+./test.py
+```
+
+---
+
+# Using executables 
+
+If you want to use this often, I suggest putting it in a special directory, and adding it to your `$PATH`:
+```bash
+cd ~
+mkdir bin
+mv test.py bin
+export PATH=~/bin:$PATH
+```
+
+A better solution is to add `~/bin` to your path in a config (`.profile`, `.bashrc`, etc) file. 
+
+---
+
+
+ls
+cd
+pwd
+mkdir 
+rmdir
+whoami
+
+ps
+ps aux 
+top
+kill 
+wc
+cat
+>>
+> 
+| 
+
+sort (sort row data)
+
+gzip
+gunzip
+tar
+
+
+---
+
+Globbing: 
+
+cp * tmp
+
+env variables
+echo $HOME
+echo $USER
+env
+
+alias
+
+<up arrow>
+<down arrow>
+!$ previous command
+[tab] completion of program and file names
+
+
+---
+
+# Customizing your UNIX environment
+
+shells
+
+bashrc
+profile
+alias
+
+# invoking interpreters and compilers
+
+gcc
+perl
+R
+Rscript -e "foo.R"
+julia
+python
+pdflatex 
+bibtex
+Make
+
+curl
+
+ssh 
+
+---
+
+# What makes unix so powerful
+
+Write your own commands and scripts
+
+
+
+
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
