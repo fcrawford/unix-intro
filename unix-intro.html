@@ -148,7 +148,7 @@ To get started, open a terminal/shell window
 * Terminal on OS X
 * Shell on other unix systems
 * Cygwin (Terminal Emulator on Windows)
-* Or go here: https://www.tutorialspoint.com/unix_terminal_online.php
+* Or go [here](https://www.tutorialspoint.com/unix_terminal_online.php)
 
 ---
 
@@ -504,81 +504,133 @@ A better solution is to add `~/bin` to your path in a config (`.profile`, `.bash
 
 ---
 
+# Shortcuts and tips
 
-ls
-cd
-pwd
-mkdir 
-rmdir
-whoami
-
-ps
-ps aux 
-top
-kill 
-wc
-cat
->>
-> 
-| 
-
-sort (sort row data)
-
-gzip
-gunzip
-tar
-
-
+Copy all the `.txt` files in this directory into another directory:
+```bash
+cp *.txt my_text_files
+```
+Other examples
+```bash
+mv ../*.csv ../../data_files 
+```
+Enumerate parts of file names 
+```bash
+rm thing{1,2,3}.pdf
+```
 ---
 
-Globbing: 
+# Interacting with the command line
 
-cp * tmp
+Most shells are set up to make it easy to run commands
 
-env variables
-echo $HOME
-echo $USER
-env
-
-alias
-
-<up arrow>
-<down arrow>
-!$ previous command
-[tab] completion of program and file names
+* `[up arrow]` previous command
+* `[down arrow]` next command
+* `!$` previous argument, as in 
+```bash
+pdflatex foo
+bibtex !$
+```
+* `[tab]` completion of program and file names
 
 
 ---
 
 # Customizing your UNIX environment
 
-shells
+
+It is possible to customize your UNIX enviroment to make your work easier and more productive.  
 
 bashrc
 profile
 alias
 
-# invoking interpreters and compilers
+---
 
-gcc
-perl
-R
-Rscript -e "foo.R"
-julia
-python
-pdflatex 
-bibtex
-Make
+# All your favorite programs on the command line
 
-curl
+### Version control and collaboration 
 
-ssh 
+> git, hg, svn, cvs
+
+A typical git session: 
+```bash
+mkdir myproject
+cd !$
+git init 
+  Initialized empty Git repository in /Users/forrestcrawford/src/myproject/.git/
+git remote add origin git@github.com:fcrawford/myproject.git
+  [make changes]
+git commit -am "first commit"
+git push -u origin master
+```
 
 ---
 
-# What makes unix so powerful
+### R
 
-Write your own commands and scripts
+```r
+R
+
+R version 3.5.0 (2018-04-23) -- "Joy in Playing"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> 
+```
+or
+
+```bash
+Rscript -e myprog.R
+```
+(this is useful for running R scripts on the cluster)
+
+---
+
+# TeX/LaTeX
+
+To compile your LaTeX document `foo.tex` to PDF:
+```bash
+pdflatex foo.tex
+bibtex foo
+pdflatex foo.tex
+pdflatex foo.tex
+```
+
+---
+
+# Remote access
+
+Use `curl` to scrape a web page
+```bash
+curl http://www.crawfordlab.io
+```
+
+Use `ssh` to log in to a remote host
+```bash
+ssh forrest@remotehost
+```
+
+---
+
+# Further resources
+
+Google your unix problems.  Unix has been around a lot longer than Google, and you are not the first person to have trouble.  If that fails, ask someone! 
+
 
 
 
