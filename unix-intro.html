@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Unix For Scientists</title>
+    <title>UNIX For Scientists</title>
     <style>
       @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -126,7 +126,7 @@ class: center, middle, inverse
 
 ---
 
-# Unix for Scientists
+# UNIX for Scientists
 
 ### Scientific Research Skills Workshop Series
 
@@ -150,15 +150,25 @@ To get started, open a terminal/shell window
 * Cygwin (Terminal Emulator on Windows)
 * Or go [here](https://www.tutorialspoint.com/unix_terminal_online.php)
 
+You can follow along in the slides by downloading/cloning this repository
+
+> https://github.com/fcrawford/unix-intro
+
+and opening `unix-intro.html` in any web browser. 
+
 ---
 
 # What is UNIX?
 
-Unix is a kind of computer operating system invented in the 1970s.  You may have heard of many variants of UNIX:
+UNIX is a kind of computer operating system invented in the 1970s.  You may have heard of many variants of UNIX:
 
 > BSD, OS X, Linux, RHEL, Ubuntu, Debian
 
-UNIX is popular because it is simple, modular, secure, and extremely flexible.  Most UNIX tools are open-source. UNIX is the preferred operating system for basically all difficult or important tasks in scientific computing.
+UNIX is popular because it is simple, modular, secure, and extremely flexible.  
+
+Most UNIX tools are open-source. 
+
+UNIX is the preferred operating system for basically all difficult or important tasks in scientific computing.
 
 ---
 
@@ -186,17 +196,23 @@ command -option argument1 argument2 ...
 
 # Manpages
 
-UNIX provides a utility for learning more about commands. Every command that is intrinsic to the UNIX distribution (`cd`, `ls`, `mkdir`, `etc`.) has a manual page. These can be accessed with the `man` command. To see the manual page for the interesting command `grep`, type:
+UNIX provides a utility for learning more about commands. Every command that is intrinsic to the UNIX distribution (`cd`, `ls`, `mkdir`, `etc`.) has a manual page. These can be accessed with the `man` command. 
+
+To see the manual page for the interesting command `grep`, type:
 ```bash
 man grep
 ```
-You will see a manual page that describes the functionality of the command and its various options. Scroll through the manual (which can be very long) one screenful at a time with the space bar, one line at a time with the Enter key, and quit by typing `q`.
+You will see a manual page that describes the functionality of the command and its various options. 
+
+Scroll through the manual (which can be very long) one screenful at a time with the space bar, one line at a time with the Enter key, and quit by typing `q`.
 
 ---
 
 # Paths and the directory structure
 
-Using the UNIX terminal, you must frequently tell the computer where in its memory to find a certain file, directory, or program. In UNIX, a folder is called a "directory".  
+Using the UNIX terminal, you must frequently tell the computer where in its memory to find a certain file, directory, or program. 
+
+In UNIX, a folder is called a "directory".  
 
 A directory is a place in the computer's memory where you can store files and other directories. Every directory is contained within another directory except for one, the top-level directory, which is known as the "root" directory. 
 
@@ -204,12 +220,13 @@ This structure is called the file hierarchy.
 
 The root directory contains many directories, which also contain many directories. Each directory has a name, so you can say which directory you are interested in by putting a `/` (slash) between the names of directories.  
 
-For example, the root directory contains a directory called `home`, which contains a directory whose
 name is your username. 
 
 ---
 
 # Home directory
+
+For example, my root directory contains a directory called `home`, which contains a directory whose name is the same as my username. 
 
 If your username is `forrest`, then the path to your home directory might be
 ```bash
@@ -219,8 +236,11 @@ or
 ```bash
 /Users/forrest
 ```
-on OS X.  The leading `/` means the root directory. Inside the root directory, there is a directory called `home`. Inside
-that directory, there is another named `forrest`. Likewise, if you have a directory inside your home directory
+on OS X.  
+
+The leading `/` means the root directory.  Inside the root directory, there is a directory called `home`. Inside that directory, there is another named `forrest`. 
+
+Likewise, if you have a directory inside your home directory
 called `stuff`, then the path to this directory is
 ```bash
 /home/forrest/stuff
@@ -231,8 +251,9 @@ called `stuff`, then the path to this directory is
 # Case sensitivity
 
 You should also know that UNIX is case-sensitive, which means that it knows the difference between
-lower-case and upper-case letters, and it cares about the difference. The name
-`forrest` is different from all of these:
+lower-case and upper-case letters, and it cares about the difference. 
+
+The name `forrest` is different from all of these:
 ```bash
 Forrest FORREST FoRrEsT
 ```
@@ -241,11 +262,27 @@ Forrest FORREST FoRrEsT
 
 # Navigation
 
-When you are navigating through the directory structure (finding a file, processing data, etc.), you must know where you are, and you must know where you want to go. To go to a different directory, use the cd command. cd takes one argument, which is a path. cd stands for "change directory". To go to your home directory, type:
+When you are navigating through the directory structure (finding a file, processing data, etc.), you must know where you are, and you must know where you want to go. 
+
+If you are ever unsure of where in the directory tree you are, then you can use the
+```bash
+pwd
+```
+command, which stands for "print working directory".
+
+To go to a different directory, use the `cd` command. `cd` takes one argument, which is a path. `cd` stands for "change directory". To go to your home directory, type:
 ```bash
 cd /home/forrest
 ```
-No matter where you were when you typed this, you are now in `/home/forrest`. To see the contents of your current directory, you can list its contents
+No matter where you were when you typed this, you are now in `/home/forrest`. 
+
+More on navigation soon. 
+
+---
+
+# Listing the contents of a directory
+
+To see the contents of your current directory, you can list its contents
 ```bash
 ls
 ```
@@ -256,24 +293,19 @@ ls /home/forrest
 
 ---
 
+# Hidden files
+
 Some files are hidden by default by the `ls` command. These are files that you don't want to see every
 day, but are essential configuration files for various programs you use. These files hold information
-about your preferences when using different programs, and the first character is a `.` (dot). They usually
-reside in your home directory. Type
+about your preferences when using different programs, and the first character is a `.` (dot). They usually reside in your home directory. Type
 ```bash
 ls -a
 ```
 (a stands for "all") to show all files in a directory. This is what it will look like, with the "hidden" files first, then the other files.
 ```bash
-.adobe .emacs .gimp .netscape documents src training
+.git .vimrc .emacs documents src training
 ```
 You usually won't need to worry about these files, but it's important to know they are there.
-
-If you are ever unsure of where in the directory tree you are, then you can use the
-```bash
-pwd
-```
-command, which stands for "print working directory".
 
 ---
 
@@ -333,12 +365,34 @@ Which means, in English, "copy `/home/forrest/stuff/document.txt` to my current 
 
 ---
 
-# Commands and command path
+# Commands I
 
-Now it's time for a digression before we discuss some other commands - it's important to know what a command really is. When you type a command into the terminal and press [Enter], your computer looks around in certain places for a file that has the same name as the command you typed in. A command is just a file with computer instructions in it. When your computer finds the right file, it reads those instructions, and then does whatever the command tells it to do. Commands like cd and ls and pwd are just files that contain computer instructions to do certain things, and to show you certain things on your screen. Since commands are just files with instructions in them, you can make your own commands. This is one of the most powerful features of UNIX - it is very customizable.
+Now it's time for a digression before we discuss some other commands - it's important to know what a command really is. 
 
-[give a quick example of a bash script made executable and placed in the executable path ]
-[show how to run a command not in path using `./foo` ]
+When you type a command into the terminal and press [Enter], your computer looks around in certain places for a file that has the same name as the command you typed in. 
+
+A command is just a file with computer instructions in it. When your computer finds the right file, it reads those instructions, and then does whatever the command tells it to do. 
+
+Commands like `cd` and `ls` and `pwd` are just _executable files_ that contain computer instructions to do certain things, and to show you certain things on your screen. 
+
+
+
+---
+
+# Commands II
+
+For example, the command to list the contents of a directory, `ls`, is actually an executable file.  Use the `which` command to find out where the executable file is:
+```bash
+which ls
+```
+On my system this gives `/bin/ls`. 
+
+Since commands are just files with instructions in them, you can make your own commands. This is one of the most powerful features of UNIX - it is very customizable.
+
+A UNIX system automatically looks in certain directories for executable files/commands.  Changing these variables is somewhat beyond the scope of this presentation, but you can see your path by doing: 
+```bash
+echo $PATH
+```
 
 ---
 # Making files and directories
@@ -348,7 +402,7 @@ The `mkdir` command makes a new directory, and you can use it like this:
 mkdir name
 ```
 where `name` is what you want to name the new directory. If you list several
-names and `mkdir` will create directories with all the names you specify.
+names separated by a space, `mkdir` will create directories with all the names you specify.
 
 The `cp` command copies a file or directory from one place to another:
 ```bash
@@ -356,7 +410,7 @@ cp thing somewhere
 ```
 where `thing` is the file or directory you want to copy, and `somewhere` is the place where you want to put it. If `thing` is a directory, and you want to copy the directory and all its contents, then you can use the `-r` flag, as in:
 ```bash
-cp -r myfiles /home/forrest/private
+cp -r myfiles /home/forrest
 ```
 
 ---
@@ -373,14 +427,14 @@ The `mv` command moves a file or directory from one place to another, or renames
 ```bash
 mv thing somewhere
 ```
-You can use mv to move files or directories. mv does not need a -r flag to move a directory and all its contents. The mv command can also be used to rename files or directories similarly to cp:
+or `mv name newname`.  You can use mv to move files or directories. `mv` does not need a `-r` flag to move a directory and all its contents. The `mv` command can also be used to rename files or directories similarly to `cp`:
 ```bash
 mv thing somewhere/newname
 ```
 
 ---
 
-# Removing things 
+# Deleting things 
 
 The `rm` command removes (deletes) a file or directory. It is used like this:
 ```bash
@@ -391,6 +445,11 @@ where thing is a file.
 Empty directories can be removed with the `rmdir` command.
 
 You can remove a non-empty directory with the `-r` (recursive) flag. 
+
+*Be careful* with the `rm` command, especially this: 
+```bash
+rm -r *
+```
 
 
 ---
@@ -408,17 +467,17 @@ drwxr-xr-x 2 forrest 512 Jul 8 16:15 training
 drwxr-xr-x 5 forrest 512 May 30 11:49 yale
 -rwx------ 1 forrest 23476 May 11 05:43 zorro.jpg
 ```
-The first thing on each line that looks like this:
-```bash
-drwxr-xr-x
-```
-is the permissions field. The `d` at the beginning means that this object is a directory. The following characters are divided into 3 fields of permissions: user, group, and other. The first three characters `rwx` are the user's (owner's) permissions. The second three characters `r-x` are the permissions for other people in the user's group. The third three characters are permissions for anyone else.
+The first thing on each line that looks like this: `drwxr-xr-x` is the permissions field. 
+
+The `d` at the beginning means that this object is a directory. The following characters are divided into 3 fields of permissions: user, group, and other. The first three characters `rwx` are the user's (owner's) permissions. The second three characters `r-x` are the permissions for other people in the user's group. The third three characters are permissions for anyone else.
 
 ---
 
 # Permissions II
 
-Each set of permissions (user, group, and other) has three subfields that indicate the permissions for three different types of actions you can take on a file. The permissions for the user look something like
+Each set of permissions (user, group, and other) has three subfields that indicate the permissions for three different types of actions you can take on a file. 
+
+The permissions for the user look something like
 this:
 `rwx`
 which means that the user has "read", "write", and "execute" permission for this file.
@@ -444,36 +503,57 @@ you type:
 ```bash
 chmod g+w filename
 ```
-where `filename` is the name of the file whose permissions you wish to change. The `g+w` part means "group add write", which means "Make this file writable by users in my group". Similarly, `g+r` and `g+x` mean "make group readable" and "make group executable", respectively. You can do this for any
-of the three types of users too: `u+x` makes a file executable for you, and `o+r` makes a file readable by everyone else. You can specify all types of users with a like this: `a-x`, which makes the file non-executable by all users. There is another way to set several types of users' permissions at once using numeric values for different permissions. You can read more about it in online UNIX tutorials.
+where `filename` is the name of the file whose permissions you wish to change. 
+
+The `g+w` part means "group add write", which means "Make this file writable by users in my group". Similarly, `g+r` and `g+x` mean "make group readable" and "make group executable", respectively. You can do this for any
+of the three types of users too: `u+x` makes a file executable for you, and `o+r` makes a file readable by everyone else. You can specify all types of users with a like this: `a-x`, which makes the file non-executable by all users. 
+
 
 ---
 
-# looking at files
+# Viewing and editing text files
 
-* `more` shows the contents of a text files, one screenfull at a time. `less` is a slightly better version of `more`.
-* `cat` (concatenate) just dumps the contents of a text file on the screen
+### Viewing files
+* `cat` (concatenate) dumps the contents of a text file on the screen
+* `more` shows the contents of a text file, one screenfull at a time. 
+* `less` is a slightly better version of `more`
 * `head` shows the first few lines of a file.
 * `tail` shows the last few lines of a file
 
-Editing files
+### Editing files
 
-* `vi` Never use this unless you know what you are doing
-* `emacs`
-* `pico`
+Your UNIX system likely comes with a basic text editor, e.g. TextEdit on OS X.  In addition, nearly all UNIX systems have at least one of these:  
+
+* `vi` Default text editor on all UNIX systems. Do not use this unless you know what you are doing.
+* `emacs` Slightly easier to use
+* `pico` Easy to use. 
 
 ---
 
 # More commands
 
+A standard UNIX system has many hundreds of commands.  Most are not needed for everyday work. 
+
 * `ps` lists the active processes (programs) on your system
-* `grep` searches text files for patterns or words
+* `top` lists the processes that are using the most processor time
+* `kill` and `pkill` can be used to end runaway processes
+* `find` finds files that match certain critera
+* `grep` searches text files for patterns or words, e.g.
+```bash
+grep -i forrest documents_that_may_contain_my_name/*
+```
+* `alias` make new names for complicated commands
 
 ---
 
 # Creating a new UNIX executable
 
-Create a new text file called `test.py`
+Here is an example.  On my system, the `python` executable is located here:
+```bash
+which python
+  /usr/local/bin/python
+```
+Let's create a new text file called `test.py`
 ```python
 #!/usr/local/bin/python
 
@@ -487,6 +567,7 @@ Now run it
 ```bash
 ./test.py
 ```
+We need the `./` to tell the system to look in the current directory for the `test.py` executable. 
 
 ---
 
@@ -531,19 +612,15 @@ Most shells are set up to make it easy to run commands
 pdflatex foo
 bibtex !$
 ```
-* `[tab]` completion of program and file names
-
-
----
-
-# Customizing your UNIX environment
-
-
-It is possible to customize your UNIX enviroment to make your work easier and more productive.  
-
-bashrc
-profile
-alias
+* `[tab]` completion of program and file names, up to uniqueness, e.g
+```bash
+whic[tab]
+```
+completes the command `which`.  
+```bash
+cd Ap[tab]
+```
+completes the directory name `Applications`. 
 
 ---
 
@@ -629,7 +706,7 @@ ssh forrest@remotehost
 
 # Further resources
 
-Google your unix problems.  Unix has been around a lot longer than Google, and you are not the first person to have trouble.  If that fails, ask someone! 
+Google your UNIX problems.  UNIX has been around a lot longer than Google, and you are not the first person to have trouble. If that fails, ask someone! 
 
 
 
